@@ -1,9 +1,22 @@
 #alias t="bash ../script/tester.sh"
-arg1="$1"
-g++ $arg1 && ./a.out < ../script/entrada.txt > ../script/saida.txt &&
+
+program="$1"
+
+if [[ $program == *.py ]]
+then 
+  python3 $program < ../script/entrada.txt > ../script/saida.txt
+elif [[ $program == *.cpp ]]
+then
+  g++ $program && ./a.out < ../script/entrada.txt > ../script/saida.txt
+else
+  echo "ERROR: Invalid Language"
+  exit 1
+fi
+
 echo "--ENTRADA--" && cat ../script/entrada.txt &&
 echo "---SAIDA---" && cat ../script/saida.txt &&
 echo "--SAIDA ESPERADA--" && cat ../script/resposta.txt &&
+
 DIFF=$(diff ../script/resposta.txt ../script/saida.txt) 
 if [ "$DIFF" ]
 then
