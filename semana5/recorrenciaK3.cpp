@@ -7,6 +7,11 @@ int multMod(int a, int b) {
   return (la * lb) % modulo;
 }
 
+int somaMod(int a, int b) {
+  unsigned long long int la = a, lb = b;
+  return (a + b) % modulo;
+}
+
 int **multMat(int **A, int **B) {
   int **mat = (int **)malloc(sizeof(int *) * 3);
   for (int i = 0; i < 3; i++)
@@ -14,7 +19,7 @@ int **multMat(int **A, int **B) {
   for (int i = 0; i < 3; i++)
     for (int j = 0; j < 3; j++)
       for (int z = 0; z < 3; z++)
-        mat[i][j] += multMod(A[i][z], B[z][j]);
+        mat[i][j] = somaMod(mat[i][j], multMod(A[i][z], B[z][j]));
   return mat;
 }
 
@@ -38,11 +43,7 @@ int **expMat(int **M, int n) {
 int multMatVet(int **M, int *V) {
   unsigned long long int acc = 0;
   for (int i = 0; i < 3; i++)
-    for (int j = 0; j < 3; j++) {
-      // cout << "M: " << M[i][j] << '\n';
-      // cout << "V: " << V[j] << '\n';
-      acc += multMod(M[i][j], V[j]);
-    }
+    acc = somaMod(acc, multMod(M[0][i], V[i]));
   return acc;
 }
 
@@ -74,16 +75,12 @@ int main() {
     for (int i = 2; i >= 0; i--)
       cin >> t[i];
 
-    /*printMat(mat);
-    cout << "-----" << '\n';
-    printMat(expMat(mat, n - 2));
-    cout << "-----" << '\n';
-    */
-    cout << multMatVet(expMat(mat, n - 3), t) << '\n';
+    cout << multMatVet(expMat(mat, n - 2), t) << '\n';
 
     for (int i = 0; i < 3; i++)
       free(mat[i]);
     free(mat);
+    free(t);
   }
 
   return 0;
