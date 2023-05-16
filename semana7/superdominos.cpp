@@ -17,8 +17,6 @@ void mochila(int *dominos, int n, int s) {
       }
     }
   }
-  for (int i = 0; i < s; i++)
-    cout << m[i] << ' ';
   if (m[s - 1] != -1)
     cout << "S\n";
   else
