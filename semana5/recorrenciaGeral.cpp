@@ -14,12 +14,27 @@ int somaMod(long int a, long int b) {
 
 long int **multMat(long int **A, long int **B, int k) {
   long int **mat = (long int **)malloc(sizeof(long int *) * k);
+  for (int i = 0; i < k; i++) {
+    for (int j = 0; j < k; j++)
+      cout << A[i][j];
+    cout << '\n';
+  }
+  for (int i = 0; i < k; i++) {
+    for (int j = 0; j < k; j++)
+      cout << B[i][j];
+    cout << '\n';
+  }
   for (int i = 0; i < k; i++)
     mat[i] = (long int *)calloc(k, sizeof(long int));
   for (int i = 0; i < k; i++)
     for (int j = 0; j < k; j++)
       for (int z = 0; z < k; z++)
         mat[i][j] = somaMod(mat[i][j], multMod(A[i][z], B[z][j]));
+  for (int i = 0; i < k; i++) {
+    for (int j = 0; j < k; j++)
+      cout << mat[i][j];
+    cout << '\n';
+  }
   return mat;
 }
 
@@ -33,6 +48,7 @@ long int **expMat(long int **M, int n, int k) {
     return mat;
   }
   if (n % 2 != 0) {
+    cout << "pau";
     long int **e = expMat(M, n - 1, k);
     long int **mlt = multMat(e, M, k);
     for (int i = 0; i < k; i++)
@@ -40,6 +56,7 @@ long int **expMat(long int **M, int n, int k) {
     free(e);
     return mlt;
   } else {
+    cout << "cu";
     long int **X = expMat(M, n / 2, k);
     long int **mlt = multMat(X, X, k);
     for (int i = 0; i < k; i++)

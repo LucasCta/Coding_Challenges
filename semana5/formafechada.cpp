@@ -15,7 +15,7 @@ int main() {
     z = c;
     x = (f2 - (2 * f1) + f0) / 2;
     y = f1 - x - z;
-    printf("%g %g %g\n", x, y, z);
+    cout << x << ' ' << y << ' ' << z << '\n';
   }
   return 0;
 }
