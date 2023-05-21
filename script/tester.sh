@@ -7,7 +7,7 @@ then
   python3 $program < ../script/entrada.txt > ../script/saida.txt
 elif [[ $program == *.cpp ]]
 then
-  g++ $program && ./a.out < ../script/entrada.txt > ../script/saida.txt
+  g++ -g $program && ./a.out < ../script/entrada.txt > ../script/saida.txt
 else
   echo "ERROR: Invalid Language"
   exit 1
