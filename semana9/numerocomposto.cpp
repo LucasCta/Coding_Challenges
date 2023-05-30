@@ -16,15 +16,13 @@ void geraCrivo(int n, int *C) {
 }
 
 void geraPrimos(int n, int &np, int *C, int *P) {
-  np = 0;
   for (int i = 2; i <= n; i++)
     if (C[i] == i)
       P[++np] = i;
 }
 
 bool testaPrimo(long long int val, int np, int *P) {
-  int i;
-  for (i = 1; i <= np; i++)
+  for (int i = 1; i <= np; i++)
     if (val % P[i] == 0)
       return val == P[i];
   return true;
@@ -32,7 +30,7 @@ bool testaPrimo(long long int val, int np, int *P) {
 
 int main() {
 
-  int np, crivo_sz = sqrt(MAX_NUM) + 3;
+  int np = 0, crivo_sz = sqrt(MAX_NUM) + 3;
   int *C = (int *)malloc(sizeof(int) * crivo_sz);
   int *P = (int *)malloc(sizeof(int) * crivo_sz);
   geraCrivo(crivo_sz - 2, C);
