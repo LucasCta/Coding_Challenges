@@ -21,15 +21,18 @@ void geraPrimos(int n, int &np, int *C, int *P) {
       P[++np] = i;
 }
 
-long long int pegaFatores(long long int val, int np, int *P, int &nf, int *F) {
-  for (int i = 1; i <= np; i++)
-    if (val % P[i] == 0) {
-      if (val == P[i])
-        return val;
-      else
-        return P[i];
+void geraFatores(long long int q, int np, int &nf, int *P, long long int *F) {
+  int rq = sqrt(q) + 1;
+  for (int i = 1; i <= np; i++) {
+    while ((q % P[i]) == 0) {
+      F[++nf] = P[i];
+      q = q / P[i];
     }
-  return val;
+    if (q == 1 || P[i] >= rq)
+      break;
+  }
+  if (q != 1)
+    F[++nf] = q;
 }
 
 int main() {
@@ -47,21 +50,27 @@ int main() {
     long long int n;
     cin >> n;
 
-    int nf = 1;
+    int nf = 0;
     long long int *F = (long long int *)malloc(sizeof(long long int) * 100);
-    F[nf] = maiorFator(n, np, P);
-    while (F[nf] != n) {
-      n = n / F[nf];
-      F[++nf] = maiorFator(n, np, P);
+    geraFatores(n, np, nf, P, F);
+
+    if (nf == 0) {
+      cout << "0\n";
+      continue;
     }
 
-    int acc = 0;
-    for (int i = 1; i <= nf; i++)
-      acc += 1;
+    F[0] = F[1];
+    long long int tot = 1, val = 1;
+    for (int i = 1; i <= nf; i++) {
+      if (F[i] != F[i - 1]) {
+        tot *= val - (val / F[i - 1]);
+        val = F[i];
+      } else
+        val *= F[i];
+    }
+    tot *= val - (val / F[nf]);
 
-    for (int i = 1; i <= nf; i++)
-      cout << F[i] << ' ';
-    cout << '\n';
+    cout << tot << '\n';
 
     free(F);
   }
