@@ -25,14 +25,6 @@ long long bigMod(char *a, int n) {
   return m;
 }
 
-long long bigExp(char *ca, char *b, int n) {
-  long long a = bigMod(ca, n);
-  long long m = 1;
-  for (int i = 0; b[i] != '\0'; i++)
-    m = (fastExpMod(m, 10, n) * fastExpMod(a, b[i] - '0', n)) % n;
-  return m;
-}
-
 void geraCrivo(int n, int *C) {
   for (int i = 1; i <= n; i += 2) {
     C[i] = i;
