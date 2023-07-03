@@ -97,6 +97,13 @@ int main() {
     ponto ps = {2 * pi.p.x - ph.x, 2 * pi.p.y - ph.y};
     reta lance = PontosParaReta(pb, ps);
     boolponto plance = PontoIntersecao(retaTrapezio, lance);
+    cout << "Reta r1 " << retaTrapezio.a << ' ' << retaTrapezio.b << ' '
+         << retaTrapezio.c << '\n';
+    cout << rp.a << ' ' << rp.b << ' ' << rp.c << '\n';
+    cout << "Ponto Medio " << pi.p.x << ' ' << pi.p.y << '\n';
+    cout << "Ponto Simetrico " << ps.x << ' ' << ps.y << '\n';
+    cout << "Reta r3 " << lance.a << ' ' << lance.b << ' ' << lance.c << '\n';
+    cout << "Mira " << plance.p.x << ' ' << plance.p.y << '\n';
     if (plance.p.x > 0)
       cout << plance.p.x << ' ' << plance.p.y << '\n';
     else
