@@ -79,19 +79,22 @@ int main() {
   for (int k = 0; k < Q; k++) {
 
     char d = 'x';
-    int a = 100000, b = 100000;
+    int a = 999, b = 999;
     for (int i = 0; i < N; i++)
       for (int j = 0; j < M; j++)
         if (P[i][j] == S[k][0])
           for (int z = 0; z < 4; z++)
             if (cacaPalavra(S[k], P, 0, i, j, direction[z])) {
-              a = i, b = j, d = direction[z];
-              goto end;
+              string x = to_string(i + 1) + to_string(j + 1);
+              string y = to_string(a) + to_string(b);
+              if (lexicographical_compare(x.begin(), x.end(), y.begin(),
+                                          y.end())) {
+                a = i + 1, b = j + 1, d = direction[z];
+                break;
+              }
             }
-
-  end:
     if (d != 'x')
-      cout << a + 1 << ' ' << b + 1 << ' ' << d << '\n';
+      cout << a << ' ' << b << ' ' << d << '\n';
     else
       cout << ":(" << '\n';
   }
